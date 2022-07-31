@@ -1,7 +1,24 @@
-# Vue 3 + Typescript + Vite + Keycloak
+# vue-demo
 
-This repo contains a minimal example of how to use Vue 3 with Keycloak
+## Project setup
+```
+npm install
+```
 
-## How to run
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
 
-Copy the contents of `.env.local.example` to a `.env.local` file and fill in the blanks, after that use `pnpm run dev` to run the app in development mode with hot-reload
+### Compiles and minifies for production
+```
+npm run build
+```
+
+### Lints and fixes files
+```
+npm run lint
+```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).

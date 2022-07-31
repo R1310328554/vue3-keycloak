@@ -15,20 +15,14 @@
         {{customerMsg}}
       </p>
     </div>
-
-    <button v-on="logout" > 登出 </button>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
-// import { onMounted } from 'vue';   // 使用前需引入生命周期钩子
-// import { inject } from 'vue'
-
 
 export default {
   name: 'HelloWorld',
-  inject: ['keycloak'],
   props: {
     msg: String
   },
@@ -41,10 +35,8 @@ export default {
     }
   },
   created() {
-    console.log(" keycloak " + this.keycloak) // 'hello'
-
-    this.user = this.keycloak.idTokenParsed.preferred_username
-    this.roles = this.keycloak.realmAccess.roles
+    this.user = this.$keycloak.idTokenParsed.preferred_username
+    this.roles = this.$keycloak.realmAccess.roles
 
     this.getAdmin()
             .then(response=>{
@@ -67,19 +59,17 @@ export default {
       return axios({
         method: 'get',
         url: 'http://127.0.0.1:8082/admin',
-        headers: {'Authorization': 'Bearer ' + this.keycloak.token}
+        headers: {'Authorization': 'Bearer ' + this.$keycloak.token}
       })
-    },
-    logout() {
-      this.keycloak.logout()
     },
     getCustomer() {
       return axios({
         method: 'get',
         url: 'http://127.0.0.1:8082/customer',
-        headers: {'Authorization': 'Bearer ' + this.keycloak.token}
+        headers: {'Authorization': 'Bearer ' + this.$keycloak.token}
       })
     }
   }
 }
 </script>
+
