@@ -16,7 +16,7 @@
       </p>
     </div>
 
-    <button v-on="logout" > 登出 </button>
+    <button @click="logout" > 登出 </button>
   </div>
 </template>
 
@@ -46,6 +46,14 @@ export default {
     this.user = this.keycloak.idTokenParsed.preferred_username
     this.roles = this.keycloak.realmAccess.roles
 
+    // this.getUser(this.user)
+    //         .then(response=>{
+    //           this.adminMsg = response.data
+    //         })
+    //         .catch(error => {
+    //           console.log(error)
+    //         })
+
     this.getAdmin()
             .then(response=>{
               this.adminMsg = response.data
@@ -63,6 +71,13 @@ export default {
             })
   },
   methods: {
+    getUser(user) {
+      return axios({
+        method: 'get',
+        url: 'http://127.0.0.1:8082/'+user,
+        headers: {'Authorization': 'Bearer ' + this.keycloak.token}
+      })
+    },
     getAdmin() {
       return axios({
         method: 'get',
