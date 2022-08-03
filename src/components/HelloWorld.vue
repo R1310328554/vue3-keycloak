@@ -20,7 +20,13 @@
     </div>
 
     <button @click="ajax" > 普通ajax操作， 测试token是否过期 </button>
+    <br/>
+    
+    <span @click="$keycloak.accountManagement">个人信息管理</span> //修改密码用户名
+    <br/>
+
     <button @click="logout" > 登出 </button>
+    <br/>
   </div>
 </template>
 
