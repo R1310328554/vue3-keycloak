@@ -54,6 +54,16 @@ export default {
     //           console.log(error)
     //         })
 
+// 有对应的角色权限才能访问成功，否则 被keycloak 的拦截器拒绝，出现403 cors异常： 
+/** 
+
+  Access to XMLHttpRequest at 'http://127.0.0.1:8082/admin' from origin 'http://192.168.1.103:8080' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+HelloWorld.vue?e90b:63 AxiosError{ message: 'Network Error', name: 'AxiosError', code: 'ERR_NETWORK', config: {…}, request: XMLHttpRequest,…}
+xhr.js?1a5c:220          
+
+GET http://127.0.0.1:8082/admin net::ERR_FAILED 403
+
+*/
     this.getAdmin()
             .then(response=>{
               this.adminMsg = response.data
