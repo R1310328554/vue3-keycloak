@@ -14,8 +14,12 @@
       <p>
         {{customerMsg}}
       </p>
+      <p>
+        普通ajax操作结果：{{ajaxMsg}}
+      </p>
     </div>
 
+    <button @click="ajax" > 普通ajax操作， 测试token是否过期 </button>
     <button @click="logout" > 登出 </button>
   </div>
 </template>
@@ -37,7 +41,8 @@ export default {
       user: '',
       roles: [],
       adminMsg: '',
-      customerMsg: ''
+      customerMsg: '',
+      ajaxMsg: ''
     }
   },
   created() {
@@ -103,6 +108,19 @@ GET http://127.0.0.1:8082/admin net::ERR_FAILED 403
         method: 'get',
         url: 'http://127.0.0.1:8082/customer',
         headers: {'Authorization': 'Bearer ' + this.keycloak.token}
+      }) 
+    },
+    ajax() {
+      axios({
+        method: 'get',
+        url: 'http://127.0.0.1:8082/test',
+        headers: {'Authorization': 'Bearer ' + this.keycloak.token}
+      })
+      .then(response => {
+        this.ajaxMsg = response.data
+      })
+      .catch(error => {
+        console.log(error)
       })
     }
   }
